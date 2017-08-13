@@ -9,7 +9,9 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defonce app-state (atom {:bean-pricing 
-                          {:model {:unit-price 0.65}
+                          {:model {:unit-price 0.65
+                                   :quantity 3
+                                   :extended-price (* 0.65 3)}
                            :view-model 
                            {:header "Bean Pricing"
                             :unit-price-label "Price (per can):"
@@ -17,8 +19,14 @@
                             :extended-price-label "Extended price:"}}}))
 
 (defn when-bean-unit-price-changed [evt owner state]
-  (om/set-state! owner :unit-price (.. evt -target -value)))
+  (let [unit-price (.. evt -target -value)]
+    (om/set-state! owner :unit-price unit-price)
+    (om/set-state! owner :extended-price (* unit-price (:quantity state)))))
 
+(defn when-bean-quantity-changed [evt owner state]
+  (let [quantity (.. evt -target -value)]
+    (om/set-state! owner :quantity (.. evt -target -value))
+    (om/set-state! owner :extended-price (* (:unit-price state) quantity))))
 
 (om/root
   (fn [data owner]
@@ -39,11 +47,16 @@
                [:div [:span 
                       [:label {:for :unit} (get-in data [:bean-pricing :view-model :unit-label])]
                       [:input {:type :number
-                               :id :unit}]]]
+                               :id :unit
+                               :value (:quantity state)
+                               :on-change #(when-bean-quantity-changed % owner state)}]]]
                [:div [:span 
                       [:label {:for :extended-price} (get-in data [:bean-pricing :view-model :extended-price-label])]
-                      [:input {:type :number
-                               :id :extended-price}]]]
+                      [:input {:id :extended-price
+                               :read-only true
+                               :value (.toLocaleString (:extended-price state) 
+                                                       "us-US" 
+                                                       #js {:style "currency" :currency "USD"})}]]]
                ])
         )))
   app-state
