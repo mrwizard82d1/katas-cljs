@@ -18,10 +18,13 @@
                             :unit-label "Can(s):"
                             :extended-price-label "Extended price:"}}}))
 
+(defn set-extended-price [owner unit-price quantity]
+  (om/set-state! owner :extended-price (* unit-price quantity)))
+
 (defn when-bean-unit-price-changed [evt owner state]
   (let [unit-price (.. evt -target -value)]
     (om/set-state! owner :unit-price unit-price)
-    (om/set-state! owner :extended-price (* unit-price (:quantity state)))))
+    (set-extended-price owner unit-price (:quantity state))))
 
 (defn when-bean-quantity-changed [evt owner state]
   (let [quantity (.. evt -target -value)]
