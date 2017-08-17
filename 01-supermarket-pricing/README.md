@@ -1,6 +1,6 @@
 # supermarket-pricing
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library implementation of the "Supermarket Pricing Kata."
 
 ## Usage
 
