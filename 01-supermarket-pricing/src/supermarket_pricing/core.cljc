@@ -8,6 +8,4 @@
 (defn three-for-a-dollar
   "Calculate the extended price of `quantity` priced at 3 for a dollar."
   [quantity]
-  (if (zero? quantity)
-    0
-    1))
+  (price-beans (/ 1 3) quantity))

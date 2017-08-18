@@ -17,4 +17,7 @@
 (deftest three-for-a-dollar-test
   (testing "three for a dollar"
     (is (= 1 (spc/three-for-a-dollar 3)))
-    (is (= 0 (spc/three-for-a-dollar 0)))))
+    (is (= 0 (spc/three-for-a-dollar 0)))
+    (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
+    (is (= (/ 5 3) (spc/three-for-a-dollar 5)))
+    (is (= 2 (spc/three-for-a-dollar 6)))))
