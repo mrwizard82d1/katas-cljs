@@ -21,3 +21,8 @@
   (if (>= quantity 3)
     (three-for-a-dollar quantity)
     (simple-price 0.40 quantity)))
+
+(defn price-per-pound
+  "Calculate the extended price of `weight` priced at $1.99 per pound."
+  [weight]
+  (simple-price 1.99 weight))

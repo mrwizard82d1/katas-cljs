@@ -27,3 +27,9 @@
     (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
     (is (= 2 (spc/three-for-a-dollar 6)))
     (is (= 0.80 (spc/three-for-a-dollar-with-minimum 2)))))
+
+(deftest price-per-pound-test
+  (testing "price per pound"
+    (is (= 1.99 (spc/price-per-pound 1)))
+    (is (= 3.98 (spc/price-per-pound 2)))
+    (is (close? 0.50 (spc/price-per-pound 0.25) 1e-2))))
