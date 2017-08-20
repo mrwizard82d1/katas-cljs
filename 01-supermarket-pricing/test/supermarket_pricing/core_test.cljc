@@ -20,4 +20,10 @@
     (is (= 0 (spc/three-for-a-dollar 0)))
     (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
     (is (= (/ 5 3) (spc/three-for-a-dollar 5)))
-    (is (= 2 (spc/three-for-a-dollar 6)))))
+    (is (= 2 (spc/three-for-a-dollar 6))))
+  (testing "three for a dollar with minimum"
+    (is (= 1 (spc/three-for-a-dollar 3)))
+    (is (= 0 (spc/three-for-a-dollar 0)))
+    (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
+    (is (= 2 (spc/three-for-a-dollar 6)))
+    (is (= 0.80 (spc/three-for-a-dollar-with-minimum 2)))))
