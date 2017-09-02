@@ -9,27 +9,33 @@
 
 (deftest bean-pricing-test
   (testing "bean pricing"
-    (is (= 0 (spc/price-beans 0 1)))
-    (is (= (float 0) (spc/price-beans 0.65 0)))
-    (is (= 0.65 (spc/price-beans 0.65 1)))
+    (are [expected unit quantity] (= expected (spc/price-beans unit quantity))
+         0 0 1
+         (float 0) 0.65 0
+         0.65 0.65 1)
     (is (close? 1.95 (spc/price-beans 0.65 3) 1e-6))))
 
 (deftest three-for-a-dollar-test
   (testing "three for a dollar"
-    (is (= 1 (spc/three-for-a-dollar 3)))
-    (is (= 0 (spc/three-for-a-dollar 0)))
-    (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
-    (is (= (/ 5 3) (spc/three-for-a-dollar 5)))
-    (is (= 2 (spc/three-for-a-dollar 6))))
+    (are [expected quantity]
+         (= expected (spc/three-for-a-dollar quantity))
+         1 3
+         0 0
+         (/ 4 3) 4
+         (/ 5 3) 5
+         2 6))
   (testing "three for a dollar with minimum"
-    (is (= 1 (spc/three-for-a-dollar 3)))
-    (is (= 0 (spc/three-for-a-dollar 0)))
-    (is (= (/ 4 3) (spc/three-for-a-dollar 4)))
-    (is (= 2 (spc/three-for-a-dollar 6)))
-    (is (= 0.80 (spc/three-for-a-dollar-with-minimum 2)))))
+    (are [expected quantity]
+         (= expected (spc/three-for-a-dollar-with-minimum quantity))
+         1 3
+         0.0 0
+         (/ 4 3) 4
+         2 6
+         0.80 2)))
 
 (deftest price-per-pound-test
   (testing "price per pound"
     (is (= 1.99 (spc/price-per-pound 1)))
     (is (= 3.98 (spc/price-per-pound 2)))
     (is (close? 0.50 (spc/price-per-pound 0.25) 1e-2))))
+
