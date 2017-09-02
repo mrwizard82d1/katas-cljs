@@ -39,3 +39,12 @@
     (is (= 3.98 (spc/price-per-pound 2)))
     (is (close? 0.50 (spc/price-per-pound 0.25) 1e-2))))
 
+(deftest buy-two-get-one-free
+  (testing "buy two get one free"
+    (is (= 0.87 (spc/buy-two-get-one-free 0.87 1)))
+    (is (= 1.74 (spc/buy-two-get-one-free 0.87 2)))
+    (is (= 1.74 (spc/buy-two-get-one-free 0.87 3)))))
+
+
+
+

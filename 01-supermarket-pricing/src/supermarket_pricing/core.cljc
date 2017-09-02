@@ -26,3 +26,12 @@
   "Calculate the extended price of `weight` priced at $1.99 per pound."
   [weight]
   (simple-price 1.99 weight))
+
+(defn buy-two-get-one-free
+  "Calculate the extended price of `quantity` items priced at `unit-price` with terms 'buy one get two free'."
+  [unit-price quantity]
+  (if (not (= (rem quantity 3) 0))
+    (* unit-price quantity)
+    (* unit-price (dec quantity))))
+
+
