@@ -41,10 +41,11 @@
 
 (deftest buy-two-get-one-free
   (testing "buy two get one free"
-    (is (= 0.87 (spc/buy-two-get-one-free 0.87 1)))
-    (is (= 1.74 (spc/buy-two-get-one-free 0.87 2)))
-    (is (= 1.74 (spc/buy-two-get-one-free 0.87 3)))))
-
+    (are [expected unit-price quantity]
+      (= expected (spc/buy-two-get-one-free unit-price quantity))
+      0.87 0.87 1
+      1.74 0.87 2
+      1.74 0.87 3)))
 
 
 
