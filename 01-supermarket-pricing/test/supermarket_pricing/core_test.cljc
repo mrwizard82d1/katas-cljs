@@ -45,7 +45,10 @@
       (= expected (spc/buy-two-get-one-free unit-price quantity))
       0.87 0.87 1
       1.74 0.87 2
-      1.74 0.87 3)))
+      1.74 0.87 3
+      2.61 0.87 4
+      3.48 0.87 5
+      3.48 0.87 6)))
 
 
 
