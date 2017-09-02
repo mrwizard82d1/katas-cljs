@@ -30,8 +30,4 @@
 (defn buy-two-get-one-free
   "Calculate the extended price of `quantity` items priced at `unit-price` with terms 'buy one get two free'."
   [unit-price quantity]
-  (if (not (= (rem quantity 3) 0))
-    (+ (* 2 unit-price (quot quantity 3)) (* unit-price (rem quantity 3)))
-    (* 2 unit-price (quot quantity 3))))
-
-
+  (+ (* 2 unit-price (quot quantity 3)) (* unit-price (rem quantity 3))))
